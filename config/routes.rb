@@ -7,6 +7,10 @@ Rails.application.routes.draw do
   resources :categorias
   resources :lembretes
   resources :metas
+  resources :atividades
+  resources :users
+  resources :planner_views
+  resources :statuses
 
   # Defina a rota raiz ("/") se desejar
   # root "tarefas#index"  # ou outro controlador e ação que você preferir
