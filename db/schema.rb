@@ -16,14 +16,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_22_123951) do
 
   create_table "atividades", force: :cascade do |t|
     t.string "name"
-    t.string "email"
     t.string "descricao"
     t.integer "prioridade"
     t.date "data"
+    t.bigint "status_id", null: false
     t.bigint "planner_views_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["planner_views_id"], name: "index_atividades_on_planner_views_id"
+    t.index ["status_id"], name: "index_atividades_on_status_id"
   end
 
   create_table "categoria", force: :cascade do |t|
@@ -55,9 +56,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_22_123951) do
 
   create_table "planner_views", force: :cascade do |t|
     t.string "nome"
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
     t.index ["user_id"], name: "index_planner_views_on_user_id"
   end
 
@@ -72,22 +73,30 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_22_123951) do
     t.string "descricao"
     t.integer "bloco"
     t.bigint "atividades_id", null: false
+    t.bigint "status_id", null: false
+    t.bigint "categoria_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["atividades_id"], name: "index_tarefas_on_atividades_id"
+    t.index ["categoria_id"], name: "index_tarefas_on_categoria_id"
+    t.index ["status_id"], name: "index_tarefas_on_status_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "email"
+    t.string "senha"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   add_foreign_key "atividades", "planner_views", column: "planner_views_id"
+  add_foreign_key "atividades", "statuses"
   add_foreign_key "lembretes", "tarefas", column: "tarefas_id"
   add_foreign_key "meta", "categoria", column: "categoria_id"
   add_foreign_key "meta", "statuses"
   add_foreign_key "planner_views", "users"
   add_foreign_key "tarefas", "atividades", column: "atividades_id"
+  add_foreign_key "tarefas", "categoria", column: "categoria_id"
+  add_foreign_key "tarefas", "statuses"
 end
