@@ -4,6 +4,6 @@ class User < ApplicationRecord
     # Validações, relacionamentos e métodos podem ser adicionados aqui
     validates :nome, presence: true
     validates :senha, presence: true
-    validates :email, presence: true, uniqueness: true
+    validates :email, presence: true
     
   end

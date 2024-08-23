@@ -1,7 +1,7 @@
 class Atividade < ApplicationRecord
-    belongs_to :plannerView
+    belongs_to :planner_view
     belongs_to :tarefa
-    has_one :statuses
+    has_one :status
 
     validates :nome, presence: true
     validates :descricao, presence: true

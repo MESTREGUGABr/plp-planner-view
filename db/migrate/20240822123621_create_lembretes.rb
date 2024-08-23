@@ -3,7 +3,7 @@ class CreateLembretes < ActiveRecord::Migration[7.1]
     create_table :lembretes do |t|
       t.date :data
       t.string :descricao
-      t.references :tarefas, null: false, foreign_key: true
+      t.references :tarefa, null: false, foreign_key: true
 
       t.timestamps
     end

@@ -1,8 +1,8 @@
 class Tarefa < ApplicationRecord
-    has_one :atividades
-    has_one :statuses
-    has_one :categorias
-    belongs_to :Lembrete
+    has_one :atividade
+    has_one :status
+    has_one :categoria
+    belongs_to :lembrete
 
     validates :data, presence: true
     validates :descricao, presence: true
