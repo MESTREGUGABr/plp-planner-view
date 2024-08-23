@@ -1,6 +1,6 @@
 class Atividade < ApplicationRecord
-    belongs_to :planner_view
-    belongs_to :tarefa
+  # belongs_to :planner_view
+  # belongs_to :tarefa
     has_one :status
 
     validates :nome, presence: true
