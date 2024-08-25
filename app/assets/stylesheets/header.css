@@ -1,0 +1,92 @@
+body {
+    font-family: 'Rancho', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #FFFFFF;
+}
+
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #7360F1;
+    height: 10px;
+    padding: 50px 50px;
+    color: white;
+}
+
+.logo h1 {
+    font-family: 'Rancho', sans-serif;
+    font-size: 75px;
+    font-weight: 400;
+    line-height: 93.16px;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.search-bar {
+    position: absolute;
+    top: 35px;
+    left: 900px; 
+    font-family: 'Poppins', sans-serif;
+}
+
+.search-bar input {
+    font-family: 'Poppins', sans-serif;
+    width: 350px;
+    height: 36px;
+    padding: 5px;
+    border-radius: 35px;
+    border: none;
+    font-size: 18px;
+    background-color: #FFFFFF;
+}
+
+.user-icon img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+@media (max-width: 1200px) {
+    .search-bar {
+        left: 700px; 
+    }
+}
+
+@media (max-width: 992px) {
+    .search-bar {
+        left: 500px; 
+    }
+}
+
+@media (max-width: 768px) {
+    .main-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+    }
+
+    .search-bar {
+        position: static;
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    .search-bar input {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .logo h1 {
+        font-size: 50px;
+        line-height: 60px;
+    }
+
+    .search-bar input {
+        width: 100%;
+        height: 40px;
+    }
+}
