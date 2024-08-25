@@ -33,7 +33,7 @@ Planner View é uma aplicação web desenvolvida com Ruby on Rails que ajuda os 
 
     ```bash
     rails db:create
-    rails db:postgresql
+    rails db:migrate
     
 5. inicie o servidor Rails:
 
@@ -43,7 +43,7 @@ Planner View é uma aplicação web desenvolvida com Ruby on Rails que ajuda os 
 6. Acesse a aplicação no seu navegador:
 
     ```bash
-    http://localhost:3000
+    http://localhost:3000/signup
 
 ## Tecnologias Utilizadas
 

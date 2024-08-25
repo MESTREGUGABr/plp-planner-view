@@ -6,6 +6,11 @@ class UsersController < ApplicationController
     def index
       @users = User.all
     end
+
+    #GET ALL USERS
+    def get_all_users
+      @users = User.all
+    end
   
     # GET /users/1
     # GET /users/1.json
@@ -25,15 +30,13 @@ class UsersController < ApplicationController
     # POST /users.json
     def create
       @user = User.new(user_params)
-  
-      respond_to do |format|
-        if @user.save
-          format.html { redirect_to @user, notice: 'User was successfully created.' }
-          format.json { render :show, status: :created, location: @user }
-        else
-          format.html { render :new }
-          format.json { render json: @user.errors, status: :unprocessable_entity }
-        end
+
+      if @user.save
+        flash[:sucess] = "Usuário cadastrado com sucesso."
+        redirect_to get_all_users_path
+      else
+        flash[:error] = @user.errors.full_messages.to_sentence
+        render :new
       end
     end
   
@@ -69,7 +72,8 @@ class UsersController < ApplicationController
   
       # Only allow a list of trusted parameters through.
       def user_params
-        params.require(:user).permit(:name, :email, :senha, :planner_view_id)
+        params.require(:user).permit(:nome, :email, :raw_password, :raw_password_confirmation)
       end
+
   end
   
