@@ -11,7 +11,7 @@ class User < ApplicationRecord
   # Validações, relacionamentos e métodos podem ser adicionados aqui
   validates :nome, presence: true, length: {minimum: 6, message: "O nome deve ter no mínimo 6 caracteres"}
   validates :senha, presence: true
-  validates :email, presence: true, format: {with: URI::MailTo::EMAIL_REGEXP, message: "Não é um email válido"}
+  validates :email, presence: true, format: {with: URI::MailTo::EMAIL_REGEXP, message: "Não é um email válido"}, uniqueness: { case_sensitive: false, message: " já cadastrado" }
 
   def authenticate(raw_password)
     BCrypt::Password.new(senha) == raw_password
