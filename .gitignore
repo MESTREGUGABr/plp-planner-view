@@ -33,3 +33,34 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+/.idea
+/node_modules
+
+# Ignore yarn and webpacker files.
+/yarn-error.log
+/yarn-debug.log*
+/.byebug_history
+
+# Ignore cache
+/public/assets
+.byebug_history
+/node_modules
+/.sass-cache
+/.vscode
+/coverage/
+/spec/tmp/*
+!/spec/tmp/.keep
+**.orig
+
+# Ignore Mac and Linux file system files
+*.swp
+*.swo
+.DS_Store
+.DS_Store?
+._*
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
