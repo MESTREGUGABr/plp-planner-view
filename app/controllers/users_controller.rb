@@ -26,6 +26,12 @@ class UsersController < ApplicationController
     def edit
     end
   
+    def login
+    end
+
+    def home
+    end
+
     # POST /users
     # POST /users.json
     def create
@@ -33,7 +39,7 @@ class UsersController < ApplicationController
 
       if @user.save
         flash[:sucess] = "Usuário cadastrado com sucesso."
-        redirect_to get_all_users_path
+        redirect_to home_path  
       else
         flash[:error] = @user.errors.full_messages.to_sentence
         render :new
@@ -61,6 +67,20 @@ class UsersController < ApplicationController
       respond_to do |format|
         format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
         format.json { head :no_content }
+      end
+    end
+
+    def create_session
+      # Aqui você pode lidar com a autenticação do usuário
+      user = User.find_by(email: params[:email])
+  
+      if user && user.authenticate(params[:password])
+        session[:user_id] = user.id
+        flash[:success] = "Login bem-sucedido!"
+        redirect_to home_path  
+      else
+        flash[:error] = "Email ou senha inválidos."
+        render :login
       end
     end
   
