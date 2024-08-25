@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>PLPlanner</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <%= stylesheet_link_tag 'header', media: 'all' %>
+    <link href="https://fonts.googleapis.com/css2?family=Rancho&display=swap" rel="stylesheet">
+    <style>
+        .user-icon {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .user-icon:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="logo">
+            <h1>PLPlanner</h1>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Buscar por atividades">
+        </div>
+        <div class="user-icon">
+            <%= image_tag 'user-icon.svg', alt: 'usuário' %>
+            <div class="dropdown-content">
+            <%= link_to 'Logout', logout_path, method: :delete %>
+            </div>
+        </div>
+    </header>
+    <%= yield %>
+</body>
+</html>

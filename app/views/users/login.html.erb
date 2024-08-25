@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
+<head>
     <title>PlpPlannerView</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,36 +15,29 @@
     <%= csp_meta_tag %>
     <%= javascript_include_tag 'application' %>
 
-    <%= stylesheet_link_tag "users", "data-turbo-track": "reload" %>
-  </head>
-  <body>
-    <div class="signup-container">
-      <div class="signup-image">
-        <%= image_tag 'NewUser.png', alt: 'Organize o seu dia a dia' %>
-      </div>
+    <%= stylesheet_link_tag "login", "data-turbo-track": "reload" %> <!-- Link para o CSS específico -->
+</head>
+<body id="login-page"> <!-- ID específico para login -->
+  <div class="signup-container">
+    <div class="signup-form">
+      <h2>FAÇA<br/>LOGIN</h2>
+      <%= form_with(url: create_session_users_path, local: true) do |form| %>
+        <%= input_with_icon(form, :email, 'Email.svg', 'Email') %>
+        <%= password_input_with_icon(form, :password, 'Password.svg', 'Senha') %>
 
-      <div class="signup-form">
-        <h2>CRIE UMA<br/>CONTA</h2>
-        <%= form_with(model: @user) do |form| %>
+        <!-- Botão de Cadastro -->
+        <p><%= link_to "Não tem uma conta? Cadastre-se", new_user_path %></p>
 
-          <%= input_with_icon(form, :nome, 'User.svg', 'Nome Completo') %>
-
-          <%= input_with_icon(form, :email, 'Email.svg', 'Email') %>
-
-          <%= password_input_with_icon(form, :raw_password, 'Password.svg', 'Senha') %>
-
-          <%= password_input_with_icon(form, :raw_password_confirmation, 'Password.svg', 'Confirme sua Senha') %>
-
-          <p><%= link_to "Já tenho cadastro", root_path %></p>
-
-          <div class="form-group">
-            <%= form.submit "CADASTRAR", class: "btn-primary"%>
-          </div>
-        <% end %>
-
-
-      </div>
+        <div class="form-group">
+          <%= form.submit "ENTRAR", class: "btn-primary"%>
+        </div>
+      <% end %>
     </div>
+
+    <div class="signup-image">
+      <%= image_tag 'NewUser.png', alt: 'Bem-vindo de volta!' %>
+    </div>
+  </div>
 
   <% if flash[:success] %>
     <script>
@@ -59,7 +52,5 @@
         });
     </script>
   <% end %>
-
-
-  </body>
+</body>
 </html>
