@@ -5,11 +5,11 @@
     <div class="calendar">
       <div class="calendar-header">
         <button id="prevMonth">
-            <%= image_tag 'Vector_direito.svg', alt: 'Vector_direito' %>
+          <%= image_tag 'Vector_direito.svg', alt: 'Vector_direito' %>
         </button>
         <h2 id="monthYear"></h2>
         <button class="calendar-mes" id="nextMonth">
-            <%= image_tag 'Vector_esquerdo.svg', alt: 'Vector_esquerdo' %>
+          <%= image_tag 'Vector_esquerdo.svg', alt: 'Vector_esquerdo' %>
         </button>
       </div>
       <table class="calendar-table">
@@ -25,13 +25,52 @@
           </tr>
         </thead>
         <tbody id="calendarBody">
-          <!-- Dias do calendário serão gerados aqui -->
         </tbody>
       </table>
     </div>
+    
+    <div class="sidebar">
+      <button class="btn-tarefa">Adicionar tarefa</button>
+      <button class="btn-meta">Adicionar meta</button>
+      <button class="btn-relatorios">Emitir relatórios</button>
+      <div class="task-chart">
+        <canvas id="chartTarefas"></canvas>
+      </div>
+    </div>
+
+   <div class="navigate">
+     <h3>Navegar para</h3>
+     <div class="navigate-select">
+      <select id="monthSelect">
+
+        <option value="0">Janeiro</option>
+        <option value="1">Fevereiro</option>
+        <option value="2">Março</option>
+        <option value="3">Abril</option>
+        <option value="4">Maio</option>
+        <option value="5">Junho</option>
+        <option value="6">Julho</option>
+        <option value="7" selected>Agosto</option>
+        <option value="8">Setembro</option>
+        <option value="9">Outubro</option>
+        <option value="10">Novembro</option>
+        <option value="11">Dezembro</option>
+      </select>
+      <select id="yearSelect">
+ 
+        <option value="2023">2023</option>
+        <option value="2024" selected>2024</option>
+        <option value="2025">2025</option>
+        <option value="2026">2026</option>
+        <option value="2027">2027</option>
+      </select>
+    </div>
+    <button id="navigateBtn" class="navigate-btn">Navegar</button>
+               
   </section>
 </main>
 
+<canvas id="myChart" width="400" height="200"></canvas>
 <script>
   $(document).ready(function() {
     toastr.success('Página carregada com sucesso!');
@@ -79,7 +118,16 @@
       renderCalendar(currentDate);
     });
 
+    $('#navigateBtn').click(function() {
+     console.log('Navegar clicado');
+     const selectedMonth = parseInt($('#monthSelect').val(), 10);
+     const selectedYear = parseInt($('#yearSelect').val(), 10);
+     console.log(`Selecionado: Mês ${selectedMonth}, Ano ${selectedYear}`);
+     currentDate.setMonth(selectedMonth);
+     currentDate.setFullYear(selectedYear);
+     renderCalendar(currentDate);
+    });
+
     renderCalendar(currentDate);
   });
 </script>
-
