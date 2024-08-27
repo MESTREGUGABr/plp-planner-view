@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <title>PlpPlannerView</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+        <%= javascript_importmap_tags %>
+        <%= csrf_meta_tags %>
+        <%= csp_meta_tag %>
+        <%= javascript_include_tag 'application' %>
+
+        <%= stylesheet_link_tag "login", "data-turbo-track": "reload" %> <!-- Link para o CSS específico -->
+
+    </head>
+
+    <body id="login-page">
+        <div class="signup-container">
+            <div class="signup-image">
+                <%= image_tag 'NewUser.png', alt: 'Organize o seu dia a dia' %>
+            </div>
+            <div class="signup-form">
+                <h2>Esqueceu sua senha??</h2>
+                <%= form_with url: reset_password_path, method: :post do |form|%>
+                    <div class="field">
+                        <%= input_with_icon(form, :email, 'Email.svg', 'E-mail') %>
+                    </div>
+                    <p><%= link_to "Lembrei da senha", root_path %></p>
+                    <div class="form-group">
+                        <%= submit_tag 'Enviar instruções', class: "btn-primary" %>
+                    </div>
+                <% end %>
+            </div>
+            <% if flash[:success] %>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        toastr.success('<%= j flash[:success] %>');
+                    });
+                </script>
+            <% elsif flash[:error] %>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        toastr.error('<%= j flash[:error] %>');
+                    });
+                </script>
+            <% end %>
+        </div>
+    </body>
+</html>

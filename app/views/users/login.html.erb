@@ -20,12 +20,13 @@
 <body id="login-page"> <!-- ID específico para login -->
   <div class="signup-container">
     <div class="signup-form">
-      <h2>FAÇA<br/>LOGIN</h2>
+      <h2>FAÇA LOGIN</h2>
       <%= form_with(url: create_session_users_path, local: true) do |form| %>
         <%= input_with_icon(form, :email, 'Email.svg', 'Email') %>
         <%= password_input_with_icon(form, :password, 'Password.svg', 'Senha') %>
 
-        <!-- Botão de Cadastro -->
+        <p><%= link_to "Esqueceu sua senha?", new_password_path %></p>
+
         <p><%= link_to "Não tem uma conta? Cadastre-se", new_user_path %></p>
 
         <div class="form-group">
