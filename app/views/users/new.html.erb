@@ -46,19 +46,19 @@
       </div>
     </div>
 
-  <% if flash[:success] %>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            toastr.success('<%= j flash[:success] %>');
-        });
-    </script>
-  <% elsif flash[:error] %>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            toastr.error('<%= j flash[:error] %>');
-        });
-    </script>
-  <% end %>
+    <% if flash[:success] %>
+      <script>
+          document.addEventListener('DOMContentLoaded', function() {
+              toastr.success('<%= j flash[:success] %>');
+          });
+      </script>
+    <% elsif flash[:error] %>
+      <script>
+          document.addEventListener('DOMContentLoaded', function() {
+              toastr.error('<%= j flash[:error] %>');
+          });
+      </script>
+    <% end %>
 
 
   </body>
