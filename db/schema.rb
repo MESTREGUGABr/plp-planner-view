@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 8) do
+ActiveRecord::Schema[7.1].define(version: 9) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -88,6 +88,8 @@ ActiveRecord::Schema[7.1].define(version: 8) do
     t.string "senha"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_token_expires_at"
   end
 
   add_foreign_key "atividades", "planner_views"
