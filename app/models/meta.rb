@@ -1,4 +1,4 @@
-class Metum < ApplicationRecord
+class Meta < ApplicationRecord
     has_one :categoria
     has_one :status
 

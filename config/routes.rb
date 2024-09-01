@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'passwords/new'
   get 'passwords/edit'
+  
   # Rota para verificar a saúde da aplicação
   get "up" => "rails/health#show", as: :rails_health_check
 
@@ -27,6 +28,9 @@ Rails.application.routes.draw do
   # Rota para sair da conta
   get '/logout', to: 'sessions#destroy'
 
+  # Rotas para emitir relatórios
+  get 'emitir_relatorio', to: 'reports#emitir', as: 'emitir_relatorio'
+ 
   # Definições das rotas para os recursos
   resources :tarefas
   resources :categorias

@@ -52,8 +52,7 @@ class TarefasController < ApplicationController
     @tarefa = Tarefa.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
   def tarefa_params
-    params.require(:tarefa).permit(:nome, :descricao, :concluida)
+    params.require(:tarefa).permit(:data, :descricao, :bloco)
   end
 end
