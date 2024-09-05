@@ -7,4 +7,6 @@ class Tarefa < ApplicationRecord
     validates :data, presence: true
     validates :descricao, presence: true
     validates :bloco, presence: true
+    validates :atividade_id, presence: true
+    validates :categoria_id, presence: true
 end
