@@ -1,6 +1,11 @@
 class TarefasController < ApplicationController
   before_action :set_tarefa, only: %i[show edit update destroy]
-
+ 
+  def new
+    @atividades = Atividade.all # Pegue todas as atividades do banco
+    @categorias = Categoria.all # Pegue todas as categorias do banco
+    @tarefa = Tarefa.new
+  end
   # GET /tarefas
   def index
     @tarefas = Tarefa.order(:data)

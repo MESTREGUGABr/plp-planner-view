@@ -4,7 +4,7 @@ class Atividade < ApplicationRecord
     has_one :status
 
     validates :nome, presence: true
-    validates :descricao, presence: true
-    validates :prioridade, presence: true
-    validates :data, presence: true
+    validates :descricao, presence: true, allow_nil: true  # Permitindo nil
+    validates :prioridade, presence: true, allow_nil: true
+    validates :data, presence: true, allow_nil: true
 end
