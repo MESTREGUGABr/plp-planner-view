@@ -2,7 +2,6 @@ class TarefasController < ApplicationController
   before_action :set_tarefa, only: %i[show edit update destroy]
  
   def new
-    @atividades = Atividade.all # Pegue todas as atividades do banco
     @categorias = Categoria.all # Pegue todas as categorias do banco
     @tarefa = Tarefa.new
   end
@@ -59,7 +58,7 @@ class TarefasController < ApplicationController
   end
 
   def tarefa_params
-    params.require(:tarefa).permit(:data, :descricao, :bloco, :atividade_id, :categoria_id)
+    params.require(:tarefa).permit(:data, :descricao, :bloco, :categoria_id)
   end
 
   def default_status_id

@@ -36,7 +36,6 @@ Rails.application.routes.draw do
   resources :categorias
   resources :lembretes
   resources :metas
-  resources :atividades
   resources :users
   resources :planner_views
   resources :statuses
