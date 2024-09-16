@@ -7,7 +7,7 @@ class TarefasController < ApplicationController
   end
   # GET /tarefas
   def index
-    @tarefas = Tarefa.order(:data)
+    @tarefas_por_data = Tarefa.all.group_by(&:data)
   end
 
   # GET /tarefas/:id

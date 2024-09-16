@@ -1,9 +1,32 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# db/seeds.rb
+
+Tarefa.delete_all
+Categoria.delete_all
+Status.delete_all
+Categoria.create([
+  { nome: 'Tarefas Diárias' },
+  { nome: 'Prazo de Entrega' },
+  { nome: 'Aulas' },
+  { nome: 'Trabalhos' },
+  { nome: 'Revisões' },
+  { nome: 'Provas' },
+  { nome: 'Exercícios' },
+  { nome: 'Saúde' },
+  { nome: 'Hobbies' },
+  { nome: 'Tempo em Família' },
+  { nome: 'Contas a Pagar' },
+  { nome: 'Orçamento' },
+  { nome: 'Investimentos' },
+  { nome: 'Metas de Longo Prazo' },
+  { nome: 'Metas de Curto Prazo' },
+  { nome: 'Hábitos' },
+  { nome: 'Viagens' },
+  { nome: 'Filmes/Séries' },
+  { nome: 'Eventos Sociais' }
+])
+
+Status.create([
+  { nome: 'Pendente' },
+  { nome: 'Em Andamento' },
+  { nome: 'Concluído' }
+])
