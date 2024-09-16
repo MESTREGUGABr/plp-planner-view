@@ -17,11 +17,6 @@
   </div>
 
   <div class="field">
-    <%= form.label :atividade_id, "Atividade" %>
-    <%= form.collection_select :atividade_id, Atividade.all, :id, :nome, prompt: "Selecione uma Atividade" %>
-  </div>
-
-  <div class="field">
     <%= form.label :categoria_id, "Categoria" %>
     <%= form.collection_select :categoria_id, Categoria.all, :id, :nome, prompt: "Selecione uma Categoria" %>
   </div>

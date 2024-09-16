@@ -10,22 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 10) do
+ActiveRecord::Schema[7.1].define(version: 9) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "atividades", force: :cascade do |t|
-    t.string "nome"
-    t.string "descricao"
-    t.integer "prioridade"
-    t.date "data"
-    t.bigint "status_id", null: false
-    t.bigint "planner_view_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["planner_view_id"], name: "index_atividades_on_planner_view_id"
-    t.index ["status_id"], name: "index_atividades_on_status_id"
-  end
 
   create_table "categoria", force: :cascade do |t|
     t.string "nome"
@@ -72,12 +59,10 @@ ActiveRecord::Schema[7.1].define(version: 10) do
     t.date "data"
     t.string "descricao"
     t.integer "bloco"
-    t.bigint "atividade_id", null: false
     t.bigint "status_id", null: false
     t.bigint "categoria_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["atividade_id"], name: "index_tarefas_on_atividade_id"
     t.index ["categoria_id"], name: "index_tarefas_on_categoria_id"
     t.index ["status_id"], name: "index_tarefas_on_status_id"
   end
@@ -92,13 +77,10 @@ ActiveRecord::Schema[7.1].define(version: 10) do
     t.datetime "reset_password_token_expires_at"
   end
 
-  add_foreign_key "atividades", "planner_views"
-  add_foreign_key "atividades", "statuses"
   add_foreign_key "lembretes", "tarefas"
   add_foreign_key "meta", "categoria", column: "categoria_id"
   add_foreign_key "meta", "statuses"
   add_foreign_key "planner_views", "users"
-  add_foreign_key "tarefas", "atividades"
   add_foreign_key "tarefas", "categoria", column: "categoria_id"
   add_foreign_key "tarefas", "statuses"
 end
