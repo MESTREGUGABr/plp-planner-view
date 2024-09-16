@@ -24,7 +24,7 @@ class MetasController < ApplicationController
     @meta = Meta.new(meta_params)
 
     if @meta.save
-      redirect_to @meta, notice: 'Meta foi criada com sucesso.'
+      redirect_to home_path, notice: 'Meta foi criada com sucesso.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -54,6 +54,6 @@ class MetasController < ApplicationController
 
   # Apenas permita uma lista de parâmetros confiáveis.
   def meta_params
-    params.require(:meta).permit(:titulo, :descricao, :data_inicio, :data_fim, :status_id)
+    params.require(:meta).permit(:descricao, :data_inicio, :data_fim, :status_id, :categoria_id)
   end
 end

@@ -1,0 +1,31 @@
+<%= form_with(model: @meta, url: metas_path, local: true) do |form| %>
+  <div class="field">
+    <%= form.label :data_inicio, "Data início" %>
+    <%= form.date_select :data_inicio %>
+  </div>
+
+  <div class="field">
+    <%= form.label :data_fim, "Data fim" %>
+    <%= form.date_select :data_fim %>
+  </div>
+
+  <div class="field">
+    <%= form.label :descricao, "Descrição" %>
+    <%= form.text_area :descricao, rows: 3 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status_id, "Status" %>
+    <%= form.collection_select :status_id, Status.all, :id, :nome, prompt: "Selecione um status" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :categoria_id, "Categoria" %>
+    <%= form.collection_select :categoria_id, Categoria.all, :id, :nome, prompt: "Selecione uma Categoria" %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Criar Meta", class: "btn-primary" %>
+  </div>
+<% end %>
+  
