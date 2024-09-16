@@ -64,3 +64,4 @@ Icon?
 ehthumbs.db
 Thumbs.db
 
+/config/database.yml
