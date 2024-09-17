@@ -5,9 +5,15 @@ class TarefasController < ApplicationController
     @categorias = Categoria.all # Pegue todas as categorias do banco
     @tarefa = Tarefa.new
   end
+  
   # GET /tarefas
   def index
     @tarefas_por_data = Tarefa.all.group_by(&:data)
+    
+    respond_to do |format|
+      format.html
+      format.json { render json: @tarefas_por_data }
+    end
   end
 
   # GET /tarefas/:id
