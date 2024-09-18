@@ -86,6 +86,29 @@
       const firstDay = new Date(year, month, 1).getDay();
       const daysInMonth = new Date(year, month + 1, 0).getDate();
 
+      const categoriaClasses = {
+        1: 'tarefa-diaria',
+        2: 'prazo-entrega',
+        3: 'aulas',
+        4: 'trabalhos',
+        5: 'revisoes',
+        6: 'provas',
+        7: 'exercicios',
+        8: 'saude',
+        9: 'hobbies',
+        10: 'tempo-familia',
+        11: 'contas-pagar',
+        12: 'orcamento',
+        13: 'investimentos',
+        14: 'metas-longo-prazo',
+        15: 'metas-curto-prazo',
+        16: 'habitos',
+        17: 'viagens',
+        18: 'filmes-series',
+        19: 'eventos-sociais'
+    };
+
+
       $('#monthYear').text(`${monthNames[month]} - ${year}`);
       $('#calendarBody').empty();
 
@@ -104,8 +127,15 @@
             // Verifica se há tarefas para essa data
             if (tarefas[cellDate]) {
               tarefas[cellDate].forEach(tarefa => {
-                cellContent += `<div>${tarefa.descricao}</div>`;
-              });
+                const categoriaClass = categoriaClasses[tarefa.categoria_id];  // Obtém a classe correspondente à categoria
+                if (categoriaClass) {
+                    // Adiciona a div da tarefa com a classe correspondente
+                    cellContent += `<div class="${categoriaClass}">${tarefa.descricao}</div>`;
+                } else {
+                    // Caso a categoria não esteja mapeada, adiciona sem classe específica
+                    cellContent += `<div>${tarefa.descricao}</div>`;
+                }
+            });
             }
 
             cellContent += `</td>`;
