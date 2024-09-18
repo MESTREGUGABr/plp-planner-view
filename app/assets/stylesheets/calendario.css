@@ -202,3 +202,94 @@
     margin: 2px 0;
     border-radius: 3px;
 }
+
+.calendar-table td div {
+    font-size: 12px;
+}
+   
+.calendar-table td div {
+    font-size: 12px; 
+    color: #fdfdfd; 
+    margin-top: 2px;
+    padding: 0.5px; 
+    border-radius: 10px;
+}
+  
+/* Estilos das categorias de tarefas */
+.tarefa-diaria {
+    background-color: #FFD700; /* Amarelo */
+}
+
+.prazo-entrega {
+    background-color: #FF6347; /* Tomate */
+}
+
+.aulas {
+    background-color: #4682B4; /* Azul Aço */
+}
+
+.trabalhos {
+    background-color: #8A2BE2; /* Roxo */
+}
+
+.revisoes {
+    background-color: #20B2AA; /* Verde Água */
+}
+
+.provas {
+    background-color: #DC143C; /* Carmesim */
+}
+
+.exercicios {
+    background-color: #FF4500; /* Laranja Avermelhado */
+}
+
+.saude {
+    background-color: #32CD32; /* Verde Limão */
+}
+
+.hobbies {
+    background-color: #FF69B4; /* Rosa Choque */
+}
+
+.tempo-familia {
+    background-color: #FFB6C1; /* Rosa Claro */
+}
+
+.contas-pagar {
+    background-color: #708090; /* Cinza Escuro */
+}
+
+.orcamento {
+    background-color: #2E8B57; /* Verde Mar */
+}
+
+.investimentos {
+    background-color: #DAA520; /* Dourado */
+}
+
+.metas-longo-prazo {
+    background-color: #6A5ACD; /* Azul Real */
+}
+
+.metas-curto-prazo {
+    background-color: #FF8C00; /* Laranja Escuro */
+}
+
+.habitos {
+    background-color: #6495ED; /* Azul Claro */
+}
+
+.viagens {
+    background-color: #87CEEB; /* Azul Céu */
+}
+
+.filmes-series {
+    background-color: #9932CC; /* Roxo Escuro */
+}
+
+.eventos-sociais {
+    background-color: #FF00FF; /* Magenta */
+}
+
+  
