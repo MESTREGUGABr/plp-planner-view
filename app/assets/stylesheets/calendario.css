@@ -217,7 +217,7 @@
   
 /* Estilos das categorias de tarefas */
 .tarefa-diaria {
-    background-color: #FFD700; /* Amarelo */
+    background-color: #ff0080; 
 }
 
 .prazo-entrega {
@@ -292,4 +292,26 @@
     background-color: #FF00FF; /* Magenta */
 }
 
+
+.show-more-btn {
+    display: flex;          
+    justify-content: center;
+    align-items: center;
+    background-color: #9c65e3; 
+    color: white; 
+    border: none; 
+    padding: 8px 16px; 
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px; 
+    margin: 4px 2px; 
+    cursor: pointer; 
+    border-radius: 8px; 
+    transition: background-color 0.3s ease; 
+}
+  
+.show-more-btn:hover {
+    background-color: #4e00b3;
+}
   

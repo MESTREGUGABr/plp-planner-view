@@ -106,8 +106,7 @@
         17: 'viagens',
         18: 'filmes-series',
         19: 'eventos-sociais'
-    };
-
+      };
 
       $('#monthYear').text(`${monthNames[month]} - ${year}`);
       $('#calendarBody').empty();
@@ -126,16 +125,17 @@
 
             // Verifica se há tarefas para essa data
             if (tarefas[cellDate]) {
-              tarefas[cellDate].forEach(tarefa => {
-                const categoriaClass = categoriaClasses[tarefa.categoria_id];  // Obtém a classe correspondente à categoria
-                if (categoriaClass) {
-                    // Adiciona a div da tarefa com a classe correspondente
-                    cellContent += `<div class="${categoriaClass}">${tarefa.descricao}</div>`;
-                } else {
-                    // Caso a categoria não esteja mapeada, adiciona sem classe específica
-                    cellContent += `<div>${tarefa.descricao}</div>`;
-                }
-            });
+              const tarefasDia = tarefas[cellDate];
+              const tarefasLimitadas = tarefasDia.slice(0, 1); // Exibe somente 2 tarefas
+              tarefasLimitadas.forEach(tarefa => {
+                const categoriaClass = categoriaClasses[tarefa.categoria_id];  
+                cellContent += `<div class="${categoriaClass}">${tarefa.descricao}</div>`;
+              });
+
+              if (tarefasDia.length > 2) {
+                // Se houver mais de 2 tarefas, adiciona um botão para visualizar mais
+                cellContent += `<button class="show-more-btn" data-date="${cellDate}">Mais...</button>`;
+              }
             }
 
             cellContent += `</td>`;
@@ -146,6 +146,7 @@
         $('#calendarBody').append(row);
       }
     }
+
 
     function fetchTarefasAndRenderCalendar(date) {
       $.ajax({
@@ -177,4 +178,5 @@
 
     fetchTarefasAndRenderCalendar(currentDate); 
   });
+  
 </script>
