@@ -3,7 +3,12 @@ class MetasController < ApplicationController
 
   # GET /metas
   def index
-    @metas = Meta.all
+    @metas_por_data = Meta.all.group_by(&:data_inicio)
+    
+    respond_to do |format|
+      format.html
+      format.json { render json: @metas_por_data }
+    end
   end
 
   # GET /metas/:id
@@ -12,6 +17,7 @@ class MetasController < ApplicationController
 
   # GET /metas/new
   def new
+    @categorias = Categoria.all # Pegue todas as categorias do banco
     @meta = Meta.new
   end
 

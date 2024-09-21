@@ -32,11 +32,16 @@ Rails.application.routes.draw do
   get 'emitir_relatorio', to: 'reports#emitir', as: 'emitir_relatorio'
  
   # Definições das rotas para os recursos
-  resources :tarefas
+  resources :tarefas do
+    member do
+      patch :marcar_como_concluida
+    end
+  end
   resources :categorias
   resources :lembretes
   resources :metas
   resources :users
   resources :planner_views
   resources :statuses
+
 end

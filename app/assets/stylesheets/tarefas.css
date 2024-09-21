@@ -1,0 +1,5 @@
+/* app/assets/stylesheets/tarefas.css */
+.tem-tarefa {
+    background-color: lightgreen;
+    border: 2px solid darkgreen;   /* Borda destacada */
+}
