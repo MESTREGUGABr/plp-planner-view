@@ -1,0 +1,59 @@
+.centralizar-formulario {
+    max-width: 600px; 
+    margin: 0 auto;    
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.input-tarefa {
+    width: 100%; 
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+
+.label-tarefa {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+}
+
+
+.btn-primary {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    background-color: #6c63ff;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #574bff;
+}
+
+
+.field {
+    margin-bottom: 20px;
+}
+
+
+.titulo-pagina {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #6c63ff;
+    font-size: 28px;
+}
