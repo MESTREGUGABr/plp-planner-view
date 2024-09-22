@@ -1,64 +1,159 @@
-<h1>Relatórios</h1>
+<div class="relatorio-container">
+  <h1 class="titulo-principal">Relatório de Produtividade</h1>
 
-<h2>Metas</h2>
-<p>Total de Metas: <%= @total_metas %></p>
-<p>Metas Cumpridas: <%= @metas_cumpridas %> (<%= @porcentagem_metas_cumpridas %>%)</p>
+  <section class="metas-section card">
+    <h2 class="subtitulo">Metas</h2>
+    <p>Total de Metas: <strong><%= @total_metas %></strong></p>
+    <p>Metas Cumpridas: <strong><%= @metas_cumpridas %></strong> (<%= @porcentagem_metas_cumpridas %>%)</p>
+  </section>
 
-<h2>Tarefas</h2>
-<p>Total de Tarefas: <%= @total_tarefas %></p>
-<p>Tarefas Executadas: <%= @tarefas_executadas %> (<%= @porcentagem_tarefas_executadas %>%)</p>
+  <section class="tarefas-section card">
+    <h2 class="subtitulo">Tarefas</h2>
+    <p>Total de Tarefas: <strong><%= @total_tarefas %></strong></p>
+    <p>Tarefas Executadas: <strong><%= @tarefas_executadas %></strong> (<%= @porcentagem_tarefas_executadas %>%)</p>
+  </section>
 
-<h3>Produtividade por Semana:</h3>
-<% if @tarefas_por_semana.any? %>
-  <ul>
-    <% @tarefas_por_semana.each do |semana, quantidade| %>
-      <li>Semana de <%= semana.strftime('%d/%m/%Y') %>: <%= quantidade %> tarefas concluídas</li>
+  <section class="produtividade-grafico card">
+    <h3>Produtividade por Semana</h3>
+    <canvas id="produtividadeSemanal"></canvas>
+  </section>
+
+  <section class="produtividade-grafico card">
+    <h3>Produtividade por Mês</h3>
+    <canvas id="produtividadeMensal"></canvas>
+  </section>
+
+  <section class="produtividade-grafico card">
+    <h3>Produtividade por Turno</h3>
+    <canvas id="produtividadeTurnos"></canvas>
+  </section>
+  
+  <section class="tarefas-categoria card">
+    <h3>Categorias de Tarefas Mais Realizadas</h3>
+    <% if @tarefas_por_categoria.any? %>
+      <ul class="lista-relatorio">
+        <% @tarefas_por_categoria.each do |categoria_id, quantidade| %>
+          <li><%= Categoria.find(categoria_id).nome %>: <strong><%= quantidade %></strong> tarefas concluídas</li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>Nenhuma tarefa realizada por categoria até o momento.</p>
     <% end %>
-  </ul>
-<% else %>
-  <p>Nenhuma tarefa concluída por semana até o momento.</p>
-<% end %>
+  </section>
 
-<h3>Produtividade por Mês:</h3>
-<% if @tarefas_por_mes.any? %>
-  <ul>
-    <% @tarefas_por_mes.each do |mes, quantidade| %>
-      <li>Mês de <%= mes.strftime('%m/%Y') %>: <%= quantidade %> tarefas concluídas</li>
+  <section class="metas-categoria card">
+    <h3>Categorias de Metas Mais Realizadas</h3>
+    <% if @metas_por_categoria.any? %>
+      <ul class="lista-relatorio">
+        <% @metas_por_categoria.each do |categoria_id, quantidade| %>
+          <li><%= Categoria.find(categoria_id).nome %>: <strong><%= quantidade %></strong> metas concluídas</li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>Nenhuma meta realizada por categoria até o momento.</p>
     <% end %>
-  </ul>
-<% else %>
-  <p>Nenhuma tarefa concluída por mês até o momento.</p>
-<% end %>
+  </section>
+</div>
 
-<h3>Produtividade por Turno:</h3>
-<% if @tarefas_por_turno.any? %>
-  <ul>
-    <% @tarefas_por_turno.each do |turno, quantidade| %>
-      <li><%= turno %>: <%= quantidade %> tarefas concluídas</li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>Nenhuma tarefa concluída por turno até o momento.</p>
-<% end %>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
 
-<h3>Categorias de Tarefas Mais Realizadas:</h3>
-<% if @tarefas_por_categoria.any? %>
-  <ul>
-    <% @tarefas_por_categoria.each do |categoria_id, quantidade| %>
-      <li><%= Categoria.find(categoria_id).nome %>: <%= quantidade %> tarefas concluídas</li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>Nenhuma tarefa realizada por categoria até o momento.</p>
-<% end %>
+  const tarefasSemanais = <%= @tarefas_por_semana.to_json %>;
+  const labelsSemana = Object.keys(tarefasSemanais);
+  const dataSemanal = Object.values(tarefasSemanais); 
 
-<h3>Categorias de Metas Mais Realizadas:</h3>
-<% if @metas_por_categoria.any? %>
-  <ul>
-    <% @metas_por_categoria.each do |categoria_id, quantidade| %>
-      <li><%= Categoria.find(categoria_id).nome %>: <%= quantidade %> metas concluídas</li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>Nenhuma meta realizada por categoria até o momento.</p>
-<% end %>
+  var ctxSemana = document.getElementById('produtividadeSemanal').getContext('2d');
+  var produtividadeSemanalChart = new Chart(ctxSemana, {
+    type: 'bar',
+    data: {
+      labels: labelsSemana,
+      datasets: [{
+        label: 'Tarefas Concluídas por Semana',
+        data: dataSemanal,
+        backgroundColor: 'rgba(54, 162, 235, 0.5)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: { 
+          beginAtZero: true 
+        }
+      }
+    }
+  });
+
+  
+  const metasMensais = <%= @metas_por_mes.to_json %>;
+  const labelsMes = Object.keys(metasMensais);
+  const dataMensal = Object.values(metasMensais); 
+
+  var ctxMes = document.getElementById('produtividadeMensal').getContext('2d');
+  var produtividadeMensalChart = new Chart(ctxMes, {
+    type: 'line',
+    data: {
+      labels: labelsMes,
+      datasets: [{
+        label: 'Metas Cumpridas por Mês',
+        data: dataMensal,
+        fill: false,
+        borderColor: 'rgba(75, 192, 192, 1)',
+        tension: 0.1
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: { 
+          beginAtZero: true 
+        }
+      }
+    }
+  });
+
+  const tarefasPorTurno = <%= @tarefas_por_turno.to_json %>;
+  const labelsTurno = Object.keys(tarefasPorTurno);
+  const dataTurno = Object.values(tarefasPorTurno);
+
+  var ctxTurno = document.getElementById('produtividadeTurnos').getContext('2d');
+  var produtividadeTurnosChart = new Chart(ctxTurno, {
+    type: 'pie', 
+    data: {
+      labels: labelsTurno,
+      datasets: [{
+        label: 'Tarefas Concluídas por Turno',
+        data: dataTurno,
+        backgroundColor: [
+          'rgba(255, 99, 132, 0.5)',
+          'rgba(54, 162, 235, 0.5)',
+          'rgba(75, 192, 192, 0.5)',
+          'rgba(153, 102, 255, 0.5)'
+        ],
+        borderColor: [
+          'rgba(255, 99, 132, 1)',
+          'rgba(54, 162, 235, 1)',
+          'rgba(75, 192, 192, 1)',
+          'rgba(153, 102, 255, 1)'
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        tooltip: {
+          callbacks: {
+            label: function(tooltipItem) {
+              return tooltipItem.label + ': ' + tooltipItem.raw + ' tarefas';
+            }
+          }
+        }
+      }
+    }
+  });
+</script>
