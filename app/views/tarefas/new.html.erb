@@ -1,28 +1,29 @@
-<h1>Nova Tarefa</h1>
+<h1 class="titulo-pagina">Nova Tarefa</h1>
 
 <%= form_with(model: @tarefa, local: true) do |form| %>
-  <div class="field">
-    <%= form.label :data, "Data" %>
-    <%= form.date_select :data %>
-  </div>
+  <div class="form-container centralizar-formulario"> 
+    <div class="field">
+      <%= form.label :data, "Data", class: "label-tarefa" %>
+      <%= form.date_select :data, class: "input-tarefa" %>
+    </div>
 
-  <div class="field">
-    <%= form.label :descricao, "Descrição" %>
-    <%= form.text_area :descricao, rows: 3 %>
-  </div>
+    <div class="field">
+      <%= form.label :descricao, "Descrição", class: "label-tarefa" %>
+      <%= form.text_area :descricao, rows: 3, class: "input-tarefa" %>
+    </div>
 
-  <div class="field">
-    <%= form.label :bloco, "Bloco(em min)" %>
-    <%= form.text_field :bloco %>
-  </div>
+    <div class="field">
+      <%= form.label :bloco, "Bloco(em min)", class: "label-tarefa" %>
+      <%= form.text_field :bloco, class: "input-tarefa" %>
+    </div>
 
-  <div class="field">
-    <%= form.label :categoria_id, "Categoria" %>
-    <%= form.collection_select :categoria_id, Categoria.all, :id, :nome, prompt: "Selecione uma Categoria" %>
-  </div>
+    <div class="field">
+      <%= form.label :categoria_id, "Categoria", class: "label-tarefa" %>
+      <%= form.collection_select :categoria_id, Categoria.all, :id, :nome, { prompt: "Selecione uma Categoria" }, { class: "input-tarefa" } %>
+    </div>
 
-  <div class="actions">
-    <%= form.submit "Criar Tarefa", class: "btn-primary" %>
+    <div class="actions">
+      <%= form.submit "Criar Tarefa", class: "btn-primary" %>
+    </div>
   </div>
-  
 <% end %>
