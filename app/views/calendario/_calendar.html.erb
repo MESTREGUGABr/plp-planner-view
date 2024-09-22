@@ -149,7 +149,8 @@ $(document).ready(function() {
 
             // Se houver mais tarefas, adiciona o botão "Mais..."
             if (tarefasDia.length > 1) {
-              cellContent += `<button class="show-more-btn" data-date="${cellDate}">Mais...</button>`;
+              // Adiciona um botão para visualizar mais tarefas
+              cellContent += `<button class="show-more-btn" data-date="${cellDate}" style="display: block; margin: 10px auto 0;"></button>`;
             }
           }
 
