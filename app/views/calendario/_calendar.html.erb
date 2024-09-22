@@ -70,113 +70,202 @@
 
 <canvas id="myChart" width="400" height="200"></canvas>
 <script>
-  $(document).ready(function() {
-    toastr.success('Página carregada com sucesso!');
+$(document).ready(function() {
+  toastr.success('Página carregada com sucesso!');
 
-    const monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
-    let currentDate = new Date();
+  const monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+  let currentDate = new Date();
+  let tarefasData = {}; // Variável global para armazenar as tarefas
 
-    function formatNumber(num) {
-      return num < 10 ? '0' + num : num;
-    }
+  function formatNumber(num) {
+    return num < 10 ? '0' + num : num;
+  }
 
-    function renderCalendar(date, tarefas) {
-      const month = date.getMonth();
-      const year = date.getFullYear();
-      const firstDay = new Date(year, month, 1).getDay();
-      const daysInMonth = new Date(year, month + 1, 0).getDate();
+  function renderCalendar(date, tarefas, metas) {
+    tarefasData = tarefas; // Armazenar tarefas para acesso posterior
 
-      const categoriaClasses = {
-        1: 'tarefa-diaria',
-        2: 'prazo-entrega',
-        3: 'aulas',
-        4: 'trabalhos',
-        5: 'revisoes',
-        6: 'provas',
-        7: 'exercicios',
-        8: 'saude',
-        9: 'hobbies',
-        10: 'tempo-familia',
-        11: 'contas-pagar',
-        12: 'orcamento',
-        13: 'investimentos',
-        14: 'metas-longo-prazo',
-        15: 'metas-curto-prazo',
-        16: 'habitos',
-        17: 'viagens',
-        18: 'filmes-series',
-        19: 'eventos-sociais'
-      };
+    const month = date.getMonth();
+    const year = date.getFullYear();
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
 
-      $('#monthYear').text(`${monthNames[month]} - ${year}`);
-      $('#calendarBody').empty();
+    const categoriaClasses = {
+      1: 'tarefa-diaria',
+      2: 'prazo-entrega',
+      3: 'aulas',
+      4: 'trabalhos',
+      5: 'revisoes',
+      6: 'provas',
+      7: 'exercicios',
+      8: 'saude',
+      9: 'hobbies',
+      10: 'tempo-familia',
+      11: 'contas-pagar',
+      12: 'orcamento',
+      13: 'investimentos',
+      14: 'metas-longo-prazo',
+      15: 'metas-curto-prazo',
+      16: 'habitos',
+      17: 'viagens',
+      18: 'filmes-series',
+      19: 'eventos-sociais'
+    };
 
-      let dateCell = 1;
-      for (let i = 0; i < 6; i++) {
-        let row = $('<tr></tr>');
-        for (let j = 0; j < 7; j++) {
-          if (i === 0 && j < firstDay) {
-            row.append('<td></td>');
-          } else if (dateCell > daysInMonth) {
-            break;
-          } else {
-            const cellDate = `${year}-${formatNumber(month + 1)}-${formatNumber(dateCell)}`;
-            let cellContent = `<td style="text-align: left;">${formatNumber(dateCell)}`;
+    const statusColors = {
+      pendente: 'yellow',
+      concluida: 'green',
+      andamento: 'blue'
+    };
 
-            // Verifica se há tarefas para essa data
-            if (tarefas[cellDate]) {
-              const tarefasDia = tarefas[cellDate];
-              const tarefasLimitadas = tarefasDia.slice(0, 1); // Exibe somente 2 tarefas
-              tarefasLimitadas.forEach(tarefa => {
-                const categoriaClass = categoriaClasses[tarefa.categoria_id];  
-                cellContent += `<div class="${categoriaClass}">${tarefa.descricao}</div>`;
-              });
+    $('#monthYear').text(`${monthNames[month]} - ${year}`);
+    $('#calendarBody').empty();
 
-              if (tarefasDia.length > 2) {
-                // Se houver mais de 2 tarefas, adiciona um botão para visualizar mais
-                cellContent += `<button class="show-more-btn" data-date="${cellDate}">Mais...</button>`;
-              }
+    let dateCell = 1;
+    for (let i = 0; i < 6; i++) {
+      let row = $('<tr></tr>');
+      for (let j = 0; j < 7; j++) {
+        if (i === 0 && j < firstDay) {
+          row.append('<td></td>');
+        } else if (dateCell > daysInMonth) {
+          break;
+        } else {
+          const cellDate = `${year}-${formatNumber(month + 1)}-${formatNumber(dateCell)}`;
+          let cellContent = `<td style="text-align: left;">${formatNumber(dateCell)}`;
+
+          // Verifica se há tarefas para essa data
+          if (tarefas[cellDate]) {
+            const tarefasDia = tarefas[cellDate];
+            const tarefasLimitadas = tarefasDia.slice(0, 1); // Exibe apenas 1 tarefa inicialmente
+            tarefasLimitadas.forEach(tarefa => {
+              const categoriaClass = categoriaClasses[tarefa.categoria_id];
+              cellContent += `
+                <div class="${categoriaClass} tarefa-item" data-id="${tarefa.id}">
+                  ${tarefa.descricao}
+                  <button class="concluir-btn" data-id="${tarefa.id}" data-date="${cellDate}" style="display:none;">
+                    Marcar como Concluída
+                  </button>
+                </div>`;
+            });
+
+            // Se houver mais tarefas, adiciona o botão "Mais..."
+            if (tarefasDia.length > 1) {
+              cellContent += `<button class="show-more-btn" data-date="${cellDate}">Mais...</button>`;
             }
-
-            cellContent += `</td>`;
-            row.append(cellContent);
-            dateCell++;
           }
+
+          // Verifica se há metas para essa data
+          if (metas[cellDate]) {
+            const metasDia = metas[cellDate];
+            metasDia.forEach(meta => {
+              const statusClass = statusColors[meta.status];
+              cellContent += `<div style="background-color: ${statusClass};">${meta.descricao}</div>`;
+            });
+          }
+
+          cellContent += `</td>`;
+          row.append(cellContent);
+          dateCell++;
         }
-        $('#calendarBody').append(row);
       }
+      $('#calendarBody').append(row);
     }
+  }
 
-
-    function fetchTarefasAndRenderCalendar(date) {
-      $.ajax({
-        url: '/tarefas.json', 
-        method: 'GET',
-        success: function(tarefas) {
-          renderCalendar(date, tarefas);
-        }
-      });
-    }
-
-    $('#prevMonth').click(function() {
-      currentDate.setMonth(currentDate.getMonth() - 1);
-      fetchTarefasAndRenderCalendar(currentDate);
+  function fetchTarefasAndMetasAndRenderCalendar(date) {
+    $.ajax({
+      url: '/tarefas.json',
+      method: 'GET',
+      success: function(tarefas) {
+        $.ajax({
+          url: '/metas.json',
+          method: 'GET',
+          success: function(metas) {
+            renderCalendar(date, tarefas, metas);
+          },
+          error: function() {
+            toastr.error('Erro ao carregar metas.');
+          }
+        });
+      },
+      error: function() {
+        toastr.error('Erro ao carregar tarefas.');
+      }
     });
+  }
 
-    $('#nextMonth').click(function() {
-      currentDate.setMonth(currentDate.getMonth() + 1);
-      fetchTarefasAndRenderCalendar(currentDate);
-    });
-
-    $('#navigateBtn').click(function() {
-      const selectedMonth = parseInt($('#monthSelect').val(), 10);
-      const selectedYear = parseInt($('#yearSelect').val(), 10);
-      currentDate.setMonth(selectedMonth);
-      currentDate.setFullYear(selectedYear);
-      fetchTarefasAndRenderCalendar(currentDate);
-    });
-
-    fetchTarefasAndRenderCalendar(currentDate); 
+  $('#prevMonth').click(function() {
+    currentDate.setMonth(currentDate.getMonth() - 1);
+    fetchTarefasAndMetasAndRenderCalendar(currentDate);
   });
-  
+
+  $('#nextMonth').click(function() {
+    currentDate.setMonth(currentDate.getMonth() + 1);
+    fetchTarefasAndMetasAndRenderCalendar(currentDate);
+  });
+
+  $('#navigateBtn').click(function() {
+    const selectedMonth = parseInt($('#monthSelect').val(), 10);
+    const selectedYear = parseInt($('#yearSelect').val(), 10);
+    currentDate.setMonth(selectedMonth);
+    currentDate.setFullYear(selectedYear);
+    fetchTarefasAndMetasAndRenderCalendar(currentDate);
+  });
+
+  fetchTarefasAndMetasAndRenderCalendar(currentDate);
+
+  // Evento de clique para mostrar o botão de conclusão
+  $(document).on('click', '.tarefa-item', function() {
+    $(this).find('.concluir-btn').toggle(); // Alterna a visibilidade do botão ao clicar na tarefa
+  });
+
+  // Evento de clique para marcar como concluída
+  $(document).on('click', '.concluir-btn', function(event) {
+    event.stopPropagation(); // Previne o clique de propagação para a tarefa
+    const tarefaId = $(this).data('id');
+    const dateCell = $(this).data('date');
+
+    $.ajax({
+      url: `/tarefas/${tarefaId}/marcar_como_concluida`,
+      method: 'PATCH',
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+      },
+      success: function(response) {
+        if (response.success) {
+          toastr.success(response.message);
+          // Remover a tarefa da célula do calendário
+          $(`button[data-id="${tarefaId}"]`).closest('.tarefa-item').remove();
+        } else {
+          toastr.error('Erro ao concluir a tarefa.');
+        }
+      },
+      error: function() {
+        toastr.error('Erro ao se comunicar com o servidor.');
+      }
+    });
+  });
+
+  // Evento de clique para mostrar mais tarefas
+  $(document).on('click', '.show-more-btn', function() {
+    const cellDate = $(this).data('date');
+    const tarefasDia = tarefasData[cellDate]; // Usar tarefas armazenadas
+
+    tarefasDia.forEach((tarefa, index) => {
+      if (index > 0) { // Exibe as tarefas adicionais
+        const categoriaClass = categoriaClasses[tarefa.categoria_id];
+        $(this).closest('td').append(`
+          <div class="${categoriaClass} tarefa-item" data-id="${tarefa.id}">
+            ${tarefa.descricao}
+            <button class="concluir-btn" data-id="${tarefa.id}" data-date="${cellDate}">
+              Marcar como Concluída
+            </button>
+          </div>
+        `);
+      }
+    });
+
+    $(this).remove(); // Remove o botão "Mais..."
+  });
+});
+
 </script>
