@@ -41,7 +41,7 @@ Rails.application.routes.draw do
   resources :lembretes
   resources :metas do
     member do
-      patch 'marcar_como_concluida'
+      patch :marcar_como_concluida
     end
   end
   resources :users
