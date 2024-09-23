@@ -4,6 +4,7 @@
 <%= form_with(model: @tarefa, local: true) do |form| %>
   <div class="form-container centralizar-formulario"> 
     <h1 class="titulo-pagina">Nova Tarefa</h1>
+
     <div class="field">
       <%= form.label :data, "Data", class: "label-tarefa" %>
       <%= form.date_field :data, class: "input-tarefa" %>
@@ -18,9 +19,16 @@
       <%= form.label :bloco, "Por quanto tempo você planeja realizar esta atividade?", class: "label-tarefa" %>
       <%= form.text_field :bloco, class: "input-tarefa", placeholder: "Ex: 30 minutos" %>
     </div>
+
     <div class="field">
       <%= form.label :categoria_id, "Categoria", class: "label-tarefa" %>
       <%= form.collection_select :categoria_id, Categoria.all, :id, :nome, { prompt: "Selecione uma Categoria" }, { class: "input-tarefa" } %>
+    </div>
+
+    <!-- Novo campo para selecionar o turno -->
+    <div class="field">
+      <%= form.label :turno, "Em qual turno você pretende realizar a atividade?", class: "label-tarefa" %>
+      <%= form.select :turno, [["Manhã", "Manhã"], ["Tarde", "tarde"], ["Noite", "noite"], ["Madrugada", "madrugada"]], { prompt: "Selecione um turno" }, { class: "input-tarefa" } %>
     </div>
 
     <div class="actions">
@@ -28,5 +36,6 @@
     </div>
   </div>
 <% end %>
+
 </body>
 
