@@ -151,9 +151,9 @@ $(document).ready(function() {
           if (metas[cellDate]) {
             const metasDia = metas[cellDate];
             metasDia.forEach(meta => {
-              const statusClass = statusColors[meta.status];
+              const categoriaClass = categoriaClasses[meta.categoria_id];
               cellContent += `
-                <div class="meta-item" style="background-color: ${statusClass};" data-id="${meta.id}" data-type="meta">
+                <div class="${categoriaClass} meta-item" data-id="${meta.id}" data-type="meta">
                   ${meta.descricao}
                   <button class="concluir-btn" data-id="${meta.id}" data-type="meta" data-date="${cellDate}" style="display:none;">
                     Marcar como Concluída
