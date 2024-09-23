@@ -124,7 +124,7 @@
     });
 
     const tarefasPorTurno = <%= @tarefas_por_turno.to_json.html_safe %>;
-    const labelsTurno = Object.keys(tarefasPorTurno);
+    const labelsTurno = ['Madrugada', 'Manhã', 'Tarde', 'Noite'];
     const dataTurno = Object.values(tarefasPorTurno);
 
     var ctxTurno = document.getElementById('produtividadeTurnos').getContext('2d');

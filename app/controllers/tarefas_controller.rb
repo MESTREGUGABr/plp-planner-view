@@ -16,6 +16,11 @@ class TarefasController < ApplicationController
     end
   end
 
+  # GET /relatorio
+  def relatorio
+    @tarefas_por_turno = Tarefa.where(status_id: 3).group(:turno).count
+  end
+
   # GET /tarefas/:id
   def show
   end
@@ -23,10 +28,12 @@ class TarefasController < ApplicationController
   # GET /tarefas/new
   def new
     @tarefa = Tarefa.new
+    @categorias = Categoria.all # Garante que as categorias estejam disponíveis para o formulário
   end
 
   # GET /tarefas/:id/edit
   def edit
+    @categorias = Categoria.all # Incluindo categorias também no edit
   end
 
   # POST /tarefas
@@ -37,6 +44,7 @@ class TarefasController < ApplicationController
     if @tarefa.save
       redirect_to home_path, notice: 'Tarefa foi criada com sucesso.'
     else
+      @categorias = Categoria.all # Garante que categorias estejam disponíveis ao renderizar o formulário
       render :new, status: :unprocessable_entity
     end
   end
@@ -46,6 +54,7 @@ class TarefasController < ApplicationController
     if @tarefa.update(tarefa_params)
       redirect_to @tarefa, notice: 'Tarefa foi atualizada com sucesso.'
     else
+      @categorias = Categoria.all # Garante que categorias estejam disponíveis ao renderizar o formulário
       render :edit, status: :unprocessable_entity
     end
   end
@@ -55,7 +64,8 @@ class TarefasController < ApplicationController
     @tarefa.destroy
     redirect_to tarefas_url, notice: 'Tarefa foi removida com sucesso.'
   end
-  
+
+  # Marcar tarefa como concluída
   def marcar_como_concluida
     @tarefa = Tarefa.find_by(id: params[:id])
 
@@ -78,12 +88,9 @@ class TarefasController < ApplicationController
     @tarefa = Tarefa.find(params[:id])
   end
 
+  # Certifique-se de permitir o parâmetro :turno
   def tarefa_params
-    params.require(:tarefa).permit(:data, :descricao, :bloco, :categoria_id, :status_id)
-  end
-
-  def default_concluded_status_id
-    3 # Substitua pelo ID correto do status 'Concluída'
+    params.require(:tarefa).permit(:data, :descricao, :bloco, :categoria_id, :status_id, :turno)
   end
 
   def default_status_id

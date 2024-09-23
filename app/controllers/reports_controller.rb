@@ -16,17 +16,8 @@ class ReportsController < ApplicationController
       @tarefas_por_semana = tarefas_concluidas.group_by { |t| t.data.beginning_of_week }.transform_values(&:count)
       @tarefas_por_mes = tarefas_concluidas.group_by { |t| t.data.beginning_of_month }.transform_values(&:count)
 
-      @tarefas_por_turno = tarefas_concluidas.group_by do |t|
-        data_tarefa = t.data.is_a?(Date) ? t.data.to_datetime : t.data
-        
-        hora = data_tarefa.hour
-        case hora
-        when 6..12 then 'Manhã'
-        when 13..18 then 'Tarde'
-        when 19..23 then 'Noite'
-        else 'Madrugada'
-        end
-      end.transform_values(&:count)
+      # Modificação aqui: agrupando diretamente pelo turno
+      @tarefas_por_turno = tarefas_concluidas.group(:turno).count
 
       @tarefas_por_categoria = tarefas_concluidas.group(:categoria_id).count
       @metas_por_categoria = Meta.where(status_id: concluida_status.id).group(:categoria_id).count
