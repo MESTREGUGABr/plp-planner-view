@@ -7,10 +7,10 @@ class PasswordsController < ApplicationController
     user = User.find_by(email: params[:email])
     if user
       user.generate_reset_password_token
-      flash[:notice] = 'Instruções de redefinição de senha enviadas para seu e-mail.'
+      flash[:success] = 'Instruções de redefinição de senha enviadas para seu e-mail.'
       redirect_to login_path
     else
-      flash[:alert] = 'E-mail não encontrado.'
+      flash[:error] = 'E-mail não encontrado.'
       render :new
     end
   end
