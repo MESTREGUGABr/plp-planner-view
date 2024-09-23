@@ -7,77 +7,88 @@ body.metas, html.metas {
     background-color: #6580e3; 
 }
 
-.centralizar-formulario {
-    max-width: 600px;
-    padding: 60px;
+.centralizar-metas {
+    max-width: 1000px; 
+    padding: 80px; 
     background-color: #F0F4FF;
     border-radius: 15px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     font-family: 'Poppins', sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
 }
 
-.metas-titulo-pagina {
+.titulo-metas {
     text-align: center;
     margin-bottom: 30px;
     color: #7d5acf;
-    font-size: 32px;
-    font-family: 'Poppins', sans-serif;
+    font-size: 32px; 
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 10px;
+    padding: 10px; 
     border-bottom: 2px solid #6c63ff;
-    letter-spacing: 1px;
+    letter-spacing: 1px; 
 }
 
-.metas-field-group_data {
+.field-group_metas {
     display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-bottom: 20px;
+    justify-content: center; 
+    margin-right: 0px; 
+    margin-bottom: 20px; 
 }
 
-.metas-field_data {
-    flex: 1;
-    margin-right: 20px;
-}
-
-.metas-field_data:last-child {
-    margin-right: 0;
-}
-
-.metas-field-full {
-    width: 100%; 
-    margin-bottom: 20px;
-    display: flex;
+.field_metas {
+    margin-right: 90px; 
+    display: flex; 
     flex-direction: column;
     align-items: center;
+    flex-direction: row; 
+    margin-bottom: 20px; 
+    margin-right: 0px;
+    gap: 50px;
 }
 
-.metas-input-tarefa {
+.field_total_metas {
+    display: flex;
+    justify-content: center; 
+    margin-bottom: 20px; 
+    margin-right: 0px;
+}
+
+.field_data_meta, .field_meta {
+    margin-right: 20px; 
+    margin-bottom: 20px; 
+    display: flex;  
+}
+
+.field_meta:last-child, .field_data_meta:last-child {
+    margin-right: 0; 
+}
+
+.input-meta {
     width: 100%;
-    padding: 12px;
-    margin-top: 10px;
-    border-radius: 15px;
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 20px;
     border: 1px solid #ddd;
     font-size: 16px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     background-color: #fff;
 }
 
-.metas-actions {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+.label-meta {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
 }
 
-.metas-btn-primary {
+.btn-meta {
     width: 100%;
     padding: 12px;
     font-size: 16px;
-    background: linear-gradient(90deg, #6c63ff 0%, #574bff 100%); /* Gradiente corrigido */
+    background: linear-gradient(90deg, #6c63ff 0%, #574bff 100%);
     border: none;
     border-radius: 20px;
     color: white;
@@ -86,6 +97,6 @@ body.metas, html.metas {
     transition: background-color 0.3s ease;
 }
 
-.metas-btn-primary:hover {
+.btn-meta:hover {
     background-color: #574bff;
 }
