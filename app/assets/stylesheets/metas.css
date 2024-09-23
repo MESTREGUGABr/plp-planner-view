@@ -1,4 +1,4 @@
-body, html {
+body.metas, html.metas {
     height: 100%;
     margin: 0;
     display: flex;
@@ -8,22 +8,76 @@ body, html {
 }
 
 .centralizar-formulario {
-    max-width: 1000px; 
-    padding: 80px; 
+    max-width: 600px;
+    padding: 60px;
     background-color: #F0F4FF;
     border-radius: 15px;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     font-family: 'Poppins', sans-serif;
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.btn-primary {
+.metas-titulo-pagina {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #7d5acf;
+    font-size: 32px;
+    font-family: 'Poppins', sans-serif;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    border-bottom: 2px solid #6c63ff;
+    letter-spacing: 1px;
+}
+
+.metas-field-group_data {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.metas-field_data {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.metas-field_data:last-child {
+    margin-right: 0;
+}
+
+.metas-field-full {
+    width: 100%; 
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.metas-input-tarefa {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 15px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.metas-actions {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.metas-btn-primary {
     width: 100%;
     padding: 12px;
     font-size: 16px;
-    background-color: #6c63ff;
+    background: linear-gradient(90deg, #6c63ff 0%, #574bff 100%); /* Gradiente corrigido */
     border: none;
     border-radius: 20px;
     color: white;
@@ -32,62 +86,6 @@ body, html {
     transition: background-color 0.3s ease;
 }
 
-.btn-primary:hover {
+.metas-btn-primary:hover {
     background-color: #574bff;
 }
-.field-group {
-    display: flex;
-    justify-content: center; 
-    margin-bottom: 20px; 
-    margin-right: 0px; 
-}
-
-.field-group_data {
-    display: flex;
-    justify-content: center; 
-    margin-right: 0px; 
-    margin-bottom: 20px; 
-}
-
-.field_data {
-    margin-right: 90px; 
-    display: flex; 
-    flex-direction: column;
-    align-items: center;
-}
-
-.field {
-    margin-right: 20px; 
-    margin-bottom: 20px; 
-    display: flex; 
-    flex-direction: column;
-    align-items: center;
-}
-
-.field:last-child {
-    margin-right: 0; 
-}
-
-.input-tarefa {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px; /* Mantém o espaço entre o rótulo e o campo */
-    border-radius: 20px;
-    border: 1px solid #ddd;
-    font-size: 16px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-}
-
-.titulo-pagina {
-    text-align: center;
-    margin-bottom: 30px;
-    color: #7d5acf;
-    font-size: 32px; 
-    font-family: 'Arial', sans-serif; 
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 10px; 
-    border-bottom: 2px solid #6c63ff;
-    letter-spacing: 1px; 
-}
-
