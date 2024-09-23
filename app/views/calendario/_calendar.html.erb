@@ -66,6 +66,17 @@
       <button id="navigateBtn" class="navigate-btn">Navegar</button>
     </div>
   </section>
+
+  <!-- Modal -->
+  <div id="infoModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 id="modalTitle"></h2>
+      <p id="modalDescription"></p>
+      <button id="markCompleteBtn">Marcar como Concluída</button>
+    </div>
+  </div>
+
 </main>
 
 <canvas id="myChart" width="400" height="200"></canvas>
@@ -76,6 +87,7 @@ $(document).ready(function() {
   const monthNames = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
   let currentDate = new Date();
   let tarefasData = {}; // Variável global para armazenar as tarefas
+  let currentItemId = null; // Para armazenar o ID do item clicado
 
   const categoriaClasses = {
     1: 'tarefa-diaria',
@@ -140,9 +152,6 @@ $(document).ready(function() {
               cellContent += `
                 <div class="${categoriaClass} tarefa-item" data-id="${tarefa.id}" data-type="tarefa">
                   ${tarefa.descricao}
-                  <button class="concluir-btn" data-id="${tarefa.id}" data-type="tarefa" data-date="${cellDate}" style="display:none;">
-                    Marcar como Concluída
-                  </button>
                 </div>`;
             });
           }
@@ -155,9 +164,6 @@ $(document).ready(function() {
               cellContent += `
                 <div class="${categoriaClass} meta-item" data-id="${meta.id}" data-type="meta">
                   ${meta.descricao}
-                  <button class="concluir-btn" data-id="${meta.id}" data-type="meta" data-date="${cellDate}" style="display:none;">
-                    Marcar como Concluída
-                  </button>
                 </div>`;
             });
           }
@@ -213,20 +219,26 @@ $(document).ready(function() {
 
   fetchTarefasAndMetasAndRenderCalendar(currentDate);
 
-  // Evento de clique para mostrar o botão de conclusão
+  // Função para abrir o modal
+  function openModal(title, description, id, type) {
+    $('#modalTitle').text(title);
+    $('#modalDescription').text(description);
+    currentItemId = id;
+    $('#infoModal').show();
+  }
+
+  // Evento de clique para mostrar o modal com detalhes
   $(document).on('click', '.tarefa-item, .meta-item', function() {
-    $(this).find('.concluir-btn').toggle(); // Alterna a visibilidade do botão ao clicar
+    const title = $(this).data('type') === 'tarefa' ? 'Tarefa' : 'Meta';
+    const description = $(this).text().trim();
+    const id = $(this).data('id');
+    openModal(title, description, id, $(this).data('type'));
   });
 
   // Evento de clique para marcar como concluída
-  $(document).on('click', '.concluir-btn', function(event) {
-    event.stopPropagation(); // Previne o clique de propagação para a tarefa/meta
-    const id = $(this).data('id');
-    const type = $(this).data('type'); // Verifica se é tarefa ou meta
-    const dateCell = $(this).data('date');
-
-    // Define a URL com base no tipo (tarefa ou meta)
-    const url = type === 'tarefa' ? `/tarefas/${id}/marcar_como_concluida` : `/metas/${id}/marcar_como_concluida`;
+  $('#markCompleteBtn').click(function() {
+    const type = $('.modal-content').data('type');
+    const url = type === 'tarefa' ? `/tarefas/${currentItemId}/marcar_como_concluida` : `/metas/${currentItemId}/marcar_como_concluida`;
 
     $.ajax({
       url: url,
@@ -237,8 +249,8 @@ $(document).ready(function() {
       success: function(response) {
         if (response.success) {
           toastr.success(response.message);
-          // Remover a meta ou tarefa da célula do calendário
-          $(`button[data-id="${id}"]`).closest(type === 'tarefa' ? '.tarefa-item' : '.meta-item').remove();
+          $('#infoModal').hide();
+          $(`div[data-id="${currentItemId}"]`).remove(); // Remove o item do calendário
         } else {
           toastr.error('Erro ao concluir.');
         }
@@ -249,27 +261,54 @@ $(document).ready(function() {
     });
   });
 
-  // Evento de clique para mostrar mais tarefas
-  $(document).on('click', '.show-more-btn', function() {
-    const cellDate = $(this).data('date');
-    const tarefasDia = tarefasData[cellDate]; // Usar tarefas armazenadas
+  // Evento de clique para fechar o modal
+  $('.close').click(function() {
+    $('#infoModal').hide();
+  });
 
-    tarefasDia.forEach((tarefa, index) => {
-      if (index > 0) { // Exibe as tarefas adicionais
-        const categoriaClass = categoriaClasses[tarefa.categoria_id];
-        $(this).closest('td').append(`
-          <div class="${categoriaClass} tarefa-item" data-id="${tarefa.id}">
-            ${tarefa.descricao}
-            <button class="concluir-btn" data-id="${tarefa.id}" data-date="${cellDate}">
-              Marcar como Concluída
-            </button>
-          </div>
-        `);
-      }
-    });
-
-    $(this).remove(); // Remove o botão "Mais..."
+  // Fechar o modal ao clicar fora dele
+  $(window).click(function(event) {
+    if ($(event.target).is('#infoModal')) {
+      $('#infoModal').hide();
+    }
   });
 });
-
 </script>
+
+<style>
+/* Estilo do Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 30%;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+</style>
