@@ -3,14 +3,25 @@ class MetasController < ApplicationController
 
   # GET /metas
   def index
-    @metas_por_data = Meta.all.group_by(&:data_inicio)
+    @metas_por_data = Meta.where.not(status_id: 3).group_by(&:data_inicio)
     
     respond_to do |format|
       format.html
       format.json { render json: @metas_por_data }
     end
   end
+  
 
+  # metas_controller.rb
+  def marcar_como_concluida
+    @meta = Meta.find(params[:id])
+    if @meta.update(status_id: 3) # Altera para o ID do status "Concluído"
+      render json: { success: true, message: 'Meta concluída com sucesso!' }
+    else
+      render json: { success: false, message: 'Erro ao concluir a meta.' }
+    end
+  end
+  
   # GET /metas/:id
   def show
   end
