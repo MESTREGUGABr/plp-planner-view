@@ -60,6 +60,27 @@
   display: block;
 }
 
+.tabela-relatorio {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.tabela-relatorio th, .tabela-relatorio td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.tabela-relatorio th {
+  background-color: #6a63ff;
+  color: white;
+}
+
+.tabela-relatorio tr:hover {
+  background-color: #e3e3f1;
+}
+
 .lista-relatorio {
   list-style: none;
   padding: 0;
@@ -81,11 +102,11 @@
 
 @keyframes fadeIn {
   from {
-      opacity: 0;
-      transform: translateY(10px);
+    opacity: 0;
+    transform: translateY(10px);
   }
   to {
-      opacity: 1;
-      transform: translateY(0);
+    opacity: 1;
+    transform: translateY(0);
   }
 }

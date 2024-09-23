@@ -32,11 +32,22 @@
     <section class="tarefas-categoria card">
       <h3>Categorias de Tarefas Mais Realizadas</h3>
       <% if @tarefas_por_categoria.any? %>
-        <ul class="lista-relatorio">
-          <% @tarefas_por_categoria.each do |categoria_id, quantidade| %>
-            <li><%= Categoria.find(categoria_id).nome %>: <strong><%= quantidade %></strong> tarefas concluídas</li>
-          <% end %>
-        </ul>
+        <table class="tabela-relatorio">
+          <thead>
+            <tr>
+              <th>Categoria</th>
+              <th>Quantidade de Tarefas Concluídas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @tarefas_por_categoria.each do |categoria_id, quantidade| %>
+              <tr>
+                <td><%= Categoria.find(categoria_id).nome %></td>
+                <td><strong><%= quantidade %></strong></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
       <% else %>
         <p>Nenhuma tarefa realizada por categoria até o momento.</p>
       <% end %>
