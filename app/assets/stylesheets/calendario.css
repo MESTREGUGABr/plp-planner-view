@@ -86,50 +86,54 @@
 }
 
 .btn-tarefa {
-    margin: 5px 0;
-    padding: 15px 20px;
-    background-color: #c05ce7; 
+    margin-top: 35px; 
+    padding: 12px 18px;
     color: #fff;
     border: none;
     border-radius: 30px; 
     cursor: pointer;
     width: 100%; 
     text-align: center;
-    font-style: italic; 
+    font-family: 'Poppins', sans-serif;
+    font-style: italic;
     font-weight: 600; 
+    text-decoration: none; 
+    font-size: inherit; 
+}
+
+.btn-meta, .btn-relatorios {
+    margin-top: 10px; 
+    padding: 12px 18px;
+    color: #fff;
+    border: none;
+    border-radius: 30px; 
+    cursor: pointer;
+    width: 100%; 
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-style: italic;
+    font-weight: 600; 
+    text-decoration: none; 
+    font-size: inherit; 
+}
+
+.btn-tarefa {
+    background: linear-gradient(45deg, #c05ce7, #d980ff); 
 }
 
 .btn-meta {
-    margin: 5px 0;
-    padding: 15px 20px;
-    background-color: #6580e3; 
-    color: #fff;
-    border: none;
-    border-radius: 30px; 
-    cursor: pointer;
-    width: 100%; 
-    text-align: center;
-    font-style: italic; 
-    font-weight: 600; 
+    background: linear-gradient(45deg, #6580e3, #7eaaff); 
 }
 
 .btn-relatorios {
-    margin: 5px 0;
-    padding: 15px 20px;
-    background-color: #7fbfff; 
-    color: #fff;
-    border: none;
-    border-radius: 30px; 
-    cursor: pointer;
-    width: 100%; 
-    text-align: center;
-    font-style: italic; 
-    font-weight: 600;
+    background: linear-gradient(45deg, #7fbfff, #9ce2ff); 
 }
 
 .btn-tarefa:hover, .btn-meta:hover, .btn-relatorios:hover {
     opacity: 0.9; 
+    text-decoration: none; 
 }
+
 
 .navigate {
     font-family: 'Poppins', sans-serif;
