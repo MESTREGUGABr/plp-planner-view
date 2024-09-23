@@ -1,41 +1,43 @@
 <%= stylesheet_link_tag 'metas', media: 'all' %>
+<body class="metas">
 <div class="form-container centralizar-formulario"> 
   <%= form_with(model: @meta, url: metas_path, local: true) do |form| %>
     
-    <h1 class="titulo-pagina">Criar Meta</h1>
+    <h1 class="metas-titulo-pagina">Criar Meta</h1>
 
-    <div class="field-group_data">
-      <div class="field_data">
+    <div class="metas-field-group_data">
+      <div class="metas-field_data">
         <%= form.label :data_inicio, "Data de Início", class: "label-tarefa" %>
-        <%= form.date_field :data_inicio, class: "input-tarefa" %>
+        <%= form.date_field :data_inicio, class: "metas-input-tarefa" %>
       </div>
 
-      <div class="field">
+      <div class="metas-field">
         <%= form.label :data_fim, "Data do Fim", class: "label-tarefa" %>
-        <%= form.date_field :data_fim, class: "input-tarefa" %>
+        <%= form.date_field :data_fim, class: "metas-input-tarefa" %>
       </div>
     </div>
 
-    <div class="field">
+    <div class="metas-field">
       <%= form.label :descricao, "Descrição", class: "label-tarefa" %>
-      <%= form.text_area :descricao, rows: 3, class: "input-tarefa" %>
+      <%= form.text_area :descricao, rows: 3, class: "metas-input-tarefa" %>
     </div>
 
-    <div class="field-group">
-      <div class="field">
+    <div class="metas-field-group">
+      <div class="metas-field">
         <%= form.label :status_id, "Status", class: "label-tarefa" %>
-        <%= form.collection_select :status_id, Status.all, :id, :nome, { prompt: "Selecione um Status" }, { class: "input-tarefa" } %>
+        <%= form.collection_select :status_id, Status.all, :id, :nome, { prompt: "Selecione um Status" }, { class: "metas-input-tarefa" } %>
       </div>
 
-      <div class="field">
+      <div class="metas-field">
         <%= form.label :categoria_id, "Categoria", class: "label-tarefa" %>
-        <%= form.collection_select :categoria_id, Categoria.all, :id, :nome, { prompt: "Selecione uma Categoria" }, { class: "input-tarefa" } %>
+        <%= form.collection_select :categoria_id, Categoria.all, :id, :nome, { prompt: "Selecione uma Categoria" }, { class: "metas-input-tarefa" } %>
       </div>
     </div>
 
-    <div class="actions">
-      <%= form.submit "Criar Meta", class: "btn-primary" %>
+    <div class="metas-actions">
+      <%= form.submit "Criar Meta", class: "metas-btn-primary" %>
     </div>
     
   <% end %>
 </div>
+</body>
