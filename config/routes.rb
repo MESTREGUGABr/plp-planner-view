@@ -39,7 +39,11 @@ Rails.application.routes.draw do
   end
   resources :categorias
   resources :lembretes
-  resources :metas
+  resources :metas do
+    member do
+      patch 'marcar_como_concluida'
+    end
+  end
   resources :users
   resources :planner_views
   resources :statuses
