@@ -69,9 +69,10 @@
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
+    // Produtividade por Semana
     const tarefasSemanais = <%= @tarefas_por_semana.to_json.html_safe %>;
     const labelsSemana = Object.keys(tarefasSemanais);
-    const dataSemanal = Object.values(tarefasSemanais); 
+    const dataSemanal = Object.values(tarefasSemanais);
 
     var ctxSemana = document.getElementById('produtividadeSemanal').getContext('2d');
     var produtividadeSemanalChart = new Chart(ctxSemana, {
@@ -96,9 +97,10 @@
       }
     });
 
+    // Produtividade por Mês
     const metasMensais = <%= @metas_por_mes.to_json.html_safe %> || {};
     const labelsMes = Object.keys(metasMensais);
-    const dataMensal = Object.values(metasMensais); 
+    const dataMensal = Object.values(metasMensais);
 
     var ctxMes = document.getElementById('produtividadeMensal').getContext('2d');
     var produtividadeMensalChart = new Chart(ctxMes, {
@@ -123,15 +125,26 @@
       }
     });
 
+    // Produtividade por Turno
     const tarefasPorTurno = <%= @tarefas_por_turno.to_json.html_safe %>;
-    const labelsTurno = ['Madrugada', 'Manhã', 'Tarde', 'Noite'];
-    const dataTurno = Object.values(tarefasPorTurno);
+    
+    // Map to define correct order of shifts
+    const labelsTurnoMap = {
+      'Madrugada': 0,
+      'Manhã': 1,
+      'Tarde': 2,
+      'Noite': 3
+    };
+
+    // Sorting the turn data based on the predefined order
+    const sortedTurnos = Object.keys(tarefasPorTurno).sort((a, b) => labelsTurnoMap[a] - labelsTurnoMap[b]);
+    const dataTurno = sortedTurnos.map(turno => tarefasPorTurno[turno]);
 
     var ctxTurno = document.getElementById('produtividadeTurnos').getContext('2d');
     var produtividadeTurnosChart = new Chart(ctxTurno, {
-      type: 'pie', 
+      type: 'pie',
       data: {
-        labels: labelsTurno,
+        labels: sortedTurnos,
         datasets: [{
           label: 'Tarefas Concluídas por Turno',
           data: dataTurno,
