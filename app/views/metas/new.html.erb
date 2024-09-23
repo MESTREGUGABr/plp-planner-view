@@ -6,29 +6,29 @@
     <h1 class="titulo-metas">Criar Meta</h1>
 
     <div class="field-group_metas">
-      <div class="field_data">
+      <div class="field_data_meta">
         <%= form.label :data_inicio, "Data Início", class: "label-meta" %>
         <%= form.date_field :data_inicio, class: "input-meta" %>
       </div>
 
-      <div class="field_data">
+      <div class="field_data_meta">
         <%= form.label :data_fim, "Data Fim", class: "label-meta" %>
         <%= form.date_field :data_fim, class: "input-meta" %>
       </div>
     </div>
 
-    <div class="field">
+    <div class="field_meta">
       <%= form.label :descricao, "Descrição", class: "label-meta" %>
       <%= form.text_area :descricao, rows: 3, class: "input-meta" %>
     </div>
 
     <div class="field-group_metas">
-      <div class="field_total">
+      <div class="field_total_metas">
         <%= form.label :status_id, "Status", class: "label-meta" %>
         <%= form.collection_select :status_id, Status.all, :id, :nome, { prompt: "Selecione um Status" }, { class: "input-meta" } %>
       </div>
 
-      <div class="field_total">
+      <div class="field_total_metas">
         <%= form.label :categoria_id, "Categoria", class: "label-meta" %>
         <%= form.collection_select :categoria_id, Categoria.all, :id, :nome, { prompt: "Selecione uma Categoria" }, { class: "input-meta" } %>
       </div>

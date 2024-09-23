@@ -48,20 +48,20 @@ body.metas, html.metas {
     gap: 50px;
 }
 
-.field_total {
+.field_total_metas {
     display: flex;
     justify-content: center; 
     margin-bottom: 20px; 
     margin-right: 0px;
 }
 
-.field_data, .field {
+.field_data_meta, .field_meta {
     margin-right: 20px; 
     margin-bottom: 20px; 
     display: flex;  
 }
 
-.field:last-child, .field_data:last-child {
+.field_meta:last-child, .field_data_meta:last-child {
     margin-right: 0; 
 }
 
