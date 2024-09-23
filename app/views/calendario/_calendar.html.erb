@@ -224,6 +224,7 @@ $(document).ready(function() {
     $('#modalTitle').text(title);
     $('#modalDescription').text(description);
     currentItemId = id;
+    $('.modal-content').data('type', type); // Armazena o tipo no modal
     $('#infoModal').show();
   }
 
