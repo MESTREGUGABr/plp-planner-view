@@ -56,11 +56,22 @@
     <section class="metas-categoria card">
       <h3>Categorias de Metas Mais Realizadas</h3>
       <% if @metas_por_categoria.any? %>
-        <ul class="lista-relatorio">
-          <% @metas_por_categoria.each do |categoria_id, quantidade| %>
-            <li><%= Categoria.find(categoria_id).nome %>: <strong><%= quantidade %></strong> metas concluídas</li>
-          <% end %>
-        </ul>
+      <table class="tabela-relatorio">
+          <thead>
+            <tr>
+              <th>Categoria</th>
+              <th>Quantidade de Metas Concluídas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @metas_por_categoria.each do |categoria_id, quantidade| %>
+              <tr>
+                <td><%= Categoria.find(categoria_id).nome %></td>
+                <td><strong><%= quantidade %></strong></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>  
       <% else %>
         <p>Nenhuma meta realizada por categoria até o momento.</p>
       <% end %>
