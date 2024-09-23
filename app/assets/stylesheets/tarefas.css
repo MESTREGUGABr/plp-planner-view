@@ -1,33 +1,32 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #7fbfff; 
+}
+
 
 .centralizar-formulario {
-    max-width: 600px;  
-    margin: 0 auto;   
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 1000px; 
+    padding: 80px; 
+    background-color: #F0F4FF;
+    border-radius: 15px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Poppins', sans-serif;
 }
-
 
 .input-tarefa {
-    width: 100%;  
-    padding: 2px;
-    margin-top: 5px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
     font-size: 16px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
 }
-
-
-.label-tarefa {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    font-size: 14px;
-    color: #333;
-}
-
 
 .btn-primary {
     width: 100%;
@@ -35,10 +34,10 @@
     font-size: 16px;
     background-color: #6c63ff;
     border: none;
-    border-radius: 8px;
+    border-radius: 20px;
     color: white;
     cursor: pointer;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease;
 }
 
@@ -46,15 +45,25 @@
     background-color: #574bff;
 }
 
-.field {
-    margin-bottom: 20px;
-}
 
+.field {
+    margin-bottom: 15px; 
+}
 
 .titulo-pagina {
     text-align: center;
     margin-bottom: 30px;
-    color: #6c63ff;
-    font-size: 28px;
+    color: #7d5acf;
+    font-size: 32px; 
+    font-family: 'Arial', sans-serif; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px; 
+    border-bottom: 2px solid #6c63ff;
+    letter-spacing: 1px; 
 }
 
+
+
+.actions {
+    text-align: center;
+}
